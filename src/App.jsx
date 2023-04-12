@@ -1,21 +1,17 @@
-// Renommer le fichier App.js => App.jsx
-// Supprimer l'import React (Vite le prend en charge)
 import { createRoot } from "react-dom/client";
+import SearchFields from "./SearchFields";
 import Crypto from "./Crypto";
-
-// Supprimer le composant crypto
-
-// eslint-disable-next-line no-unused-vars
+import { useState } from "react";
 const App = () => {
+  const [searchValue, setSearchValue] = useState("")
   return (
-    <div>
-      <h1>Liste des cryptos</h1>
-      <Crypto name="Etherium" code="ETH"/>
-      <Crypto name="Bitcoin" code="BTC"/>
-      <Crypto name="Cardano" code="ADA"/>
+    <div className="container">
+      <h1 className="title">Crypto Logos</h1>
+      <SearchFields searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <Crypto searchValue={searchValue} />
     </div>
-  )
-}
+  );
+};
 
 const container = document.getElementById("app");
 const root = createRoot(container);

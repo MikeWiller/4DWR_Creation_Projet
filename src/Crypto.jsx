@@ -1,9 +1,15 @@
-const Crypto = (props) => {
-    return (
-      <div>
-        <h1>{props.name}</h1>
-        <h2>{props.code}</h2>
-      </div>
-    );
+import ImageBlock from "./ImageBlock";
+import useGetImages from "./useGetImages";
+
+const Crypto = ({searchValue}) => {
+ const [status, cryptos] = useGetImages(searchValue)
+  return (
+    <div className="ListImageContainer">
+      {status!== "loaded" && <div>Chargement....</div>}
+      {status === "loaded" && cryptos.map((crypto) => (
+          <ImageBlock key={crypto.currency_long} crypto={crypto}/>
+      ))}
+    </div>
+  );
 };
 export default Crypto;
